@@ -1,0 +1,7 @@
+environments:
+  cluster_test:
+    kubeContext: kind-kind
+  cluster1:
+    kubeContext: kind-kind
+  cluster2:
+    kubeContext: kind-kind

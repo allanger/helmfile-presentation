@@ -1,0 +1,31 @@
+---
+templates:
+  crd-management-hook: &crd-management-hook
+    hooks: 
+      - events: ["preapply"]
+        showlogs: true
+        command: "sh"
+        args: 
+          - -c 
+          - "helm show crds {{ .Release.Chart }} --version {{ .Release.Version }}| kubectl apply -f -"
+      - events: ["prepare"]
+        showlogs: true
+        command: "sh"
+        args: 
+          - -c 
+          - "helm show crds {{ .Release.Chart }} --version {{ .Release.Version }} | kubectl diff -f - || true"
+      - events: ["postuninstall"]
+        showlogs: true
+        command: "sh"
+        args: 
+          - -c 
+          - "helm show crds {{ .Release.Chart }} --version {{ .Release.Version }} | kubectl delete -f -"
+  helm-vendor-hook: &helm-vendor-hook
+    hooks:
+      - events: ["prepare"]
+        showlogs: false
+        command: "sh"
+        args:
+          - -c
+          - "make vendor_chart chart={{ .Release.Chart }} version={{ .Release.Version }}"
+

@@ -1,0 +1,16 @@
+---
+{{ readFile "../releases.yaml" }}
+
+bases:
+  - ../environments.yaml
+  - ../repositories.yaml
+
+releases:
+  - <<: *ghost
+    installed: true
+    namespace: production
+    createNamespace: true
+  - <<: *ghost
+    installed: true
+    namespace: demo
+    createNamespace: true

@@ -1,0 +1,11 @@
+---
+{{ readFile "releases.yaml" }}
+
+bases:
+  - environments.yaml
+  - repositories.yaml
+
+releases:
+
+helmfiles:
+  - path: {{.Environment.Name }}/helmfile.yaml
