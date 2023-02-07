@@ -23,7 +23,7 @@ templates:
   helm-vendor-hook: &helm-vendor-hook
     hooks:
       - events: ["prepare"]
-        showlogs: false
+        showlogs: true
         command: "sh"
         args:
           - -c
@@ -34,7 +34,9 @@ templates:
     version: 1.6.0
     values:
       - common/{{ .Release.Name }}/values.yaml
-    <<: [*crd-management-hook, *helm-vendor-hook]
+    <<: 
+      - *helm-vendor-hook
+      - *crd-management-hook 
   goldilocks: &goldilocks
     name: goldilocks
     chart: fairwinds-stable/goldilocks
