@@ -35,8 +35,8 @@ templates:
     values:
       - common/{{ .Release.Name }}/values.yaml
     <<: 
-      - *helm-vendor-hook
-      - *crd-management-hook 
+      - <<: *crd-management-hook 
+      - <<: *helm-vendor-hook
   goldilocks: &goldilocks
     name: goldilocks
     chart: fairwinds-stable/goldilocks

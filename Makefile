@@ -15,3 +15,12 @@ build:
 
 diff:
 	docker run --rm --net=host -v "${HOME}/.kube:/helm/.kube" -v "${HOME}/.config/helm:/root/.config/helm" -v "${PWD}:/wd" --workdir /wd -it gcx-helmfile helmfile -e cluster_test diff
+
+apply:
+	docker run --rm --net=host -v "${HOME}/.kube:/helm/.kube" -v "${HOME}/.config/helm:/root/.config/helm" -v "${PWD}:/wd" --workdir /wd -it gcx-helmfile helmfile -e cluster_test apply
+
+destroy:
+	docker run --rm --net=host -v "${HOME}/.kube:/helm/.kube" -v "${HOME}/.config/helm:/root/.config/helm" -v "${PWD}:/wd" --workdir /wd -it gcx-helmfile helmfile -e cluster_test destroy
+
+lint:
+	docker run --rm --net=host -v "${HOME}/.kube:/helm/.kube" -v "${HOME}/.config/helm:/root/.config/helm" -v "${PWD}:/wd" --workdir /wd -it gcx-helmfile helmfile -e cluster_test lint
