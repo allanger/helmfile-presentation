@@ -3,7 +3,7 @@ name: Create Cluster
 on: push
 
 jobs:
-  - create-cluster:
+ create-cluster:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
