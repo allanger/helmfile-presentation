@@ -23,9 +23,22 @@ templates:
   helm-vendor-hook: &helm-vendor-hook
     hooks:
       - events: ["prepare"]
-        showlogs: false
+        showlogs: true
         command: "sh"
         args:
           - -c
           - "make vendor_chart chart={{ .Release.Chart }} version={{ .Release.Version }}"
-
+  vpa: &vpa
+    name: vpa 
+    chart: fairwinds-stable/vpa
+    version: 1.6.0
+    values:
+      - common/{{ .Release.Name }}/values.yaml
+    <<: 
+      - <<: *crd-management-hook 
+      - <<: *helm-vendor-hook
+  goldilocks: &goldilocks
+    name: goldilocks
+    chart: fairwinds-stable/goldilocks
+    version: 6.5.0
+    <<: *helm-vendor-hook

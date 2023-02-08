@@ -6,6 +6,13 @@ bases:
   - repositories.yaml
 
 releases:
+  - <<: *vpa
+    installed: true
+    namespace: vpa-system
+    createNamespace: true
+  - <<: *goldilocks
+    installed: true
+    namespace: vpa-system
 
 helmfiles:
   - path: {{.Environment.Name }}/helmfile.yaml
